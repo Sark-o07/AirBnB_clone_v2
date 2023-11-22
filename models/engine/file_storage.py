@@ -14,7 +14,7 @@ class FileStorage:
         objects_list = []
 
         if cls is None:
-            objects_list = self.__objects.values()
+            return self.__objects.values()
         else:
             for obj in self.__objects.values():
                 if isinstance(obj, cls):
@@ -24,8 +24,8 @@ class FileStorage:
     def delete(self, obj=None):
         """Delete obj from __objects if it's inside."""
         if obj is not None:
-            key = obj.__name__ + '.' + obj.id
-            if key in self.__objects:
+            key = obj.to_dict()['__class__'] + '.' + obj.id
+            if key in self.__objects.keys:
                 del self.__objects[key]
 
     def new(self, obj):
