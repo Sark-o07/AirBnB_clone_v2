@@ -297,4 +297,4 @@ $ python3 unittest -m tests/test_console.py
 
 ## Authors :black_nib:
 * **SARK** <[Kosi Nick](https://github.com/Sark-o07)>
-
+* **Sebastian** <[Sebastian Madiwanzira](https://github.com/Sir-bastian)>
