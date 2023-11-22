@@ -1,6 +1,13 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -11,22 +18,15 @@ class FileStorage:
     def all(self, cls=None):
         """Return a list of objects of one type of class,
         with optional filtering."""
-        objects_list = []
-
-        if cls is None:
-            return self.__objects.values()
-        else:
-            for obj in self.__objects.values():
-                if isinstance(obj, cls):
-                    objects_list.append(obj)
-        return objects_list
-
-    def delete(self, obj=None):
-        """Delete obj from __objects if it's inside."""
-        if obj is not None:
-            key = obj.to_dict()['__class__'] + '.' + obj.id
-            if key in self.__objects.keys:
-                del self.__objects[key]
+        if (cls):
+            if type(cls) == str:
+                cls = eval(cls)
+            filtered_dict = {}
+            for key, value in self.__objects.items():
+                if type(value) == cls:
+                    filtered_dict[key] = value
+            return filtered_dict
+        return self.__objects
 
     def delete(seelf, obj=None):
         """Deletes obj in  __objects"""
@@ -49,14 +49,6 @@ class FileStorage:
 
     def reload(self):
         """Loads storage dictionary from file"""
-        from models.base_model import BaseModel
-        from models.user import User
-        from models.place import Place
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.review import Review
-
         classes = {
                     'BaseModel': BaseModel, 'User': User, 'Place': Place,
                     'State': State, 'City': City, 'Amenity': Amenity,
