@@ -28,7 +28,7 @@ class FileStorage:
             return filtered_dict
         return self.__objects
 
-    def delete(seelf, obj=None):
+    def delete(self, obj=None):
         """Deletes obj in  __objects"""
         if (obj):
             key = "{}.{}".format(type(obj).__name__, obj.id)
