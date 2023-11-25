@@ -7,7 +7,8 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-from sqlalchemy import (create_engine)
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, scoped_session
 from os import getenv
 
@@ -66,7 +67,7 @@ class DBStorage:
         session obj if not None"""
 
         if obj:
-            self.__session.delete(obj)
+            self.session.delete(obj)
 
     def reload(self):
         """Method that creates all tables in the database"""
