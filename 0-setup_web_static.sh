@@ -6,10 +6,10 @@ sudo ufw allow 'Nginx HTTP'
 
 sudo mkdir -p /data/web_static/{releases/test,shared}
 
-echo "This is a test file" | sudo tee /data/web_static/test/index.htnl > /dev/null
+echo "This is a test file" | sudo tee /data/web_static/releases/test/index.html > /dev/null
 
 sudo ln -s -f /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
-sudo sed -i '/listen 80 default_server/a \\tlocation /hbnb_static { \n\talias /data/web_static/current/;\n\t}' /etc/nginx/sites-enabled/default
+sudo sed -i '/listen 80 default_server/a \\n\tlocation /hbnb_static { \n\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
 
 sudo service nginx restart
